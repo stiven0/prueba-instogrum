@@ -1,6 +1,7 @@
 
 archivos/
 backend/node_modules/
+backend/package-lock.json
 frontend/node_modules/
 Diagrama.instogrum.db.dia
 Diagrama.instogrum.db.dia~
