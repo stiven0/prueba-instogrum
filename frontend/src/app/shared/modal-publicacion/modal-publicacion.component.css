@@ -1,0 +1,104 @@
+
+.container_principal {
+  text-align: center;
+}
+
+.mat-dialog-title {
+  color: rgb(55, 55, 57);
+  border-bottom: 1px solid rgb(235, 235, 235);
+  font-weight: 400;
+}
+
+.mat-dialog-actions button {
+  display: block;
+  width: 50%;
+  margin: 10px auto;
+  background-color: rgb(235, 235, 235);
+  color: rgb(55, 55, 57);
+}
+
+.mat-dialog-content form div label {
+  display: block;
+  margin: auto;
+  width: 50%;
+  text-align: left;
+  color: rgb(55, 55, 57);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.mat-dialog-content form div {
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.mat-dialog-content form div input,
+.mat-dialog-content form div textarea {
+  margin-top: 10px;
+}
+
+.mat-dialog-content form div textarea {
+  width: 50%;
+  height: 80px;
+  border-color: rgba(0,0,0,.12);
+  outline: none;
+  color: gray;
+  font-size: 13px;
+}
+
+form {
+  padding-bottom: 10px;
+}
+
+.btn_file {
+  display: block;
+  width: 50%;
+  margin: 10px auto;
+}
+
+.mat-dialog-content form div span {
+  font-size: 12px;
+  color: red;
+}
+
+.iconos {
+  width: 50%;
+  margin: auto;
+}
+
+.iconos button {
+  display: block;
+}
+
+/* diseño responsive */
+@media screen and (max-width: 760px) {
+  .mat-dialog-content form div label {
+    width: 90%;
+    text-align: center;
+    color: rgb(55, 55, 57);
+    font-weight: 400;
+    font-size: 13px;
+  }
+
+  .mat-dialog-content form div {
+    padding: 5px;
+    margin-top: 5px;
+  }
+
+  .mat-dialog-content form div textarea {
+    width: 90%;
+    height: 50px;
+    font-size: 12px;
+  }
+
+  .iconos {
+    width: 90%;
+  }
+
+  .btn_file, .mat-dialog-actions button {
+    width: 90%;
+  }
+
+
+
+}

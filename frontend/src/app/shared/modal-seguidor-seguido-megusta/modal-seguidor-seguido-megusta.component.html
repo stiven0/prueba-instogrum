@@ -1,0 +1,27 @@
+
+<div class="contenedor_principal" *ngIf="seguidoresOrSeguidosOrMegustas">
+  <h1 mat-dialog-title>{{ type }}</h1>
+  <div mat-dialog-content>
+
+      <!-- si se enlistaran seguidores o seguidos o usuarios de me gustas -->
+      <button class="btn_disabled" cdkFocusInitial>xxx</button>
+      <section *ngFor="let usuario of seguidoresOrSeguidosOrMegustas">
+        <img [src]=" url + 'devolver-img-usuario/' + usuario.imagen " *ngIf="usuario.imagen">
+        <img [src]=" url + 'devolver-img-usuario/' + '123' " *ngIf="!usuario.imagen">
+
+        <h4>{{ usuario.nombre_usuario }}</h4>
+
+        <button class="btn_usuario" mat-stroked-button color="primary" (click)="redirigir(usuario.nombre_usuario)">
+          <i class="fas fa-user-check"></i>
+        </button>
+      </section>
+
+  </div>
+</div>
+
+<!-- icono de carga -->
+<div *ngIf="!seguidoresOrSeguidosOrMegustas">
+  <div [style.textAlign]="'center'">
+    <i class="fas fa-circle-notch fa-3x fa-spin" [ngStyle]="{'color' : 'rgb(77, 73, 73)'}"></i>
+  </div>
+</div>

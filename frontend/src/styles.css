@@ -1,0 +1,91 @@
+
+:root {
+  --color_icono_login : rgb(22, 27, 51);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-dialog-container {
+  border-radius: 15px !important;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: rgb(14, 129, 207);
+}
+
+.swal2-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px !important;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: rgb(14, 129, 207);
+}
+
+.pegajoso_style {
+  border-bottom: none;
+  box-shadow: 0 1px 3px 0 rgba(32,33,36,.28);
+}
+
+.pegajoso {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.mat-simple-snackbar {
+  color: white;
+}
+
+.mat-option {
+  height: 35px !important;
+  font-size: 14.5px !important;
+  padding: 25px !important;
+}
+
+.mat-option-text {
+  color: rgb(41, 43, 43) !important;
+}
+
+.img-search {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+
+.mat-menu-panel {
+  width: 84% !important;
+}

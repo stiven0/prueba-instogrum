@@ -1,0 +1,50 @@
+
+.mat-dialog-title {
+  color: rgb(55, 55, 57);
+  border-bottom: 1px solid rgb(235, 235, 235);
+  font-weight: 400;
+  text-align: center;
+}
+
+.btn_disabled {
+  display: none;
+}
+
+.mat-dialog-content section {
+  overflow: hidden;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  padding-bottom: 5px;
+}
+
+.mat-dialog-content section img {
+  width: 12%;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.mat-dialog-content section h4 {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.btn_usuario {
+  display: inline-block;
+  width: 20%;
+  line-height: 30px;
+  float: right;
+}
+
+@media screen and (max-width: 760px) {
+  .mat-dialog-title {
+    font-size: 18px;
+  }
+
+  .mat-dialog-content section img {
+    width: 14%;
+    height: 30px;
+  }
+}

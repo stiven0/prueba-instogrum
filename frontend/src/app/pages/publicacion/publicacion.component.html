@@ -1,0 +1,143 @@
+
+  <div class="contenedor_principal">
+
+    <app-header class="pegajoso"></app-header>
+
+    <!-- icono de carga -->
+    <div class="loading" *ngIf="!publicacion">
+      <i class="fas fa-circle-notch fa-3x fa-spin" [style.Color]="'rgb(77, 73, 73)'"></i>
+    </div>
+
+
+    <section class="contenedor_secundario" *ngIf="publicacion">
+
+      <!-- archivo multimedia de la publicacion (imagen o video) -->
+      <div class="multimedia_publicacion">
+        <img [src]=" url + 'devolver-archivo-publicacion/' + publicacion.archivo_multimedia "
+        *ngIf="publicacion.archivo_multimedia && publicacion.tipoArchivo === 'imagen'">
+
+        <img [src]=" url + 'devolver-archivo-publicacion/' + '123' "
+        *ngIf="!publicacion.archivo_multimedia">
+
+        <video class="multimedia_publicacion" *ngIf="publicacion.tipoArchivo === 'video'" id="imagen_publicacion" controls>
+          <source [src]=" url + 'devolver-archivo-publicacion/' + publicacion.archivo_multimedia " type="video/mp4">
+        </video>
+      </div>
+
+      <!-- informacion de la publicacion, comentarios, etc... -->
+      <div class="datos_publicacion">
+
+        <!-- informacion de usuario que realizo la publicacion -->
+        <div class="user_publicacion">
+          <img [src]=" url + 'devolver-img-usuario/' + publicacion.usuarioPublicacion.imagen "
+          *ngIf="publicacion.usuarioPublicacion.imagen">
+
+          <img [src]=" url + 'devolver-img-usuario/' + publicacion.usuarioPublicacion.imagen "
+          *ngIf="!publicacion.usuarioPublicacion.imagen">
+
+          <span (click)="dirigirPerfilUsuario(publicacion.usuarioPublicacion.nombre_usuario)">{{ publicacion.usuarioPublicacion.nombre_usuario }}</span>
+
+          <!-- boton seguir -->
+          <button class="seguir" (click)="seguirUsuario(publicacion.usuarioPublicacion._id)" mat-stroked-button color="primary"
+          *ngIf="userSeguidos && !userSeguidos.includes(publicacion.usuarioPublicacion._id)">
+            Seguir
+          </button>
+
+          <!-- boton seguido -->
+          <button class="seguido" (click)="dejarSeguir(publicacion.usuarioPublicacion)" mat-stroked-button color="accent"
+          *ngIf="userSeguidos && userSeguidos.includes(publicacion.usuarioPublicacion._id)">
+            Seguido
+          </button>
+
+          <!-- icono que aparecera cuando el usuario que hizo la publicacion sea el mismo logueado -->
+          <i class="fas fa-universal-access icono_user" *ngIf="userEqual"></i>
+        </div>
+
+        <!-- informacion de hace cuanto se creo la publicacion y el comentario si lo tiene -->
+        <div class="info_publicacion_descripcion">
+          <p class="descripcion_publicacion" style="write-space: pre-line" *ngIf="publicacion.comentario">
+            {{ publicacion.comentario }}
+          </p>
+          <h5 class="time">{{ publicacion.fecha_creacion | pipeFecha }}</h5>
+        </div>
+
+        <!-- comentarios de la publicacion -->
+        <div class="publicacion_comentarios">
+
+          <span class="total_comentarios" *ngIf="publicacion.comentarios.length > 0">Comentarios {{ publicacion.comentarios.length }}</span>
+
+          <div class="contenedor_comentarios"
+          *ngIf="comentariosPublicacion">
+            <section class="animated fadeIn" *ngFor="let comentario of comentariosPublicacion; let i = index">
+
+              <!-- img de usuario que hizo el comentario -->
+              <img class="img_user"
+              [src]=" url + 'devolver-img-usuario/' + comentario.comentario.usuarioComentario.imagen "
+              *ngIf="comentario.comentario.usuarioComentario.imagen">
+
+              <img class="img_user"
+              [src]=" url + 'devolver-img-usuario/' + '123' " *ngIf="!comentario.comentario.usuarioComentario.imagen">
+
+              <!-- name de usuario y comentario respectivo -->
+              <span class="user_comentario" (click)="dirigirPerfilUsuario(comentario.comentario.usuarioComentario.nombre_usuario)">
+                {{ comentario.comentario.usuarioComentario.nombre_usuario }}
+              </span><br/>
+              <p class="comentario_mensaje" style="write-space: pre-line">{{ comentario.comentario.comentario }}</p>
+              <h5 class="time" [style.marginTop]="'8px'">{{ comentario.fecha_comentario | pipeFecha }}</h5>
+
+            </section>
+
+              <!-- iconos de paginacion -->
+              <div [style.textAlign]="'center'">
+                <button mat-button [style.minWidth]="'50px'" (click)="retroceder()"
+                *ngIf="desde >= 6">
+                  <i [ngStyle]="{'color' : 'rgb(77, 73, 73)', 'fontSize' : '25px'}"
+                  class="fas fa-caret-left"></i>
+                </button>
+
+                <button mat-button [style.minWidth]="'50px'" (click)="avanzar()"
+                *ngIf="publicacion.comentarios.length > 6 && hasta < publicacion.comentarios.length">
+                  <i [ngStyle]="{'color' : 'rgb(77, 73, 73)', 'fontSize' : '25px'}"
+                  class="fas fa-caret-right"></i>
+                </button>
+              </div>
+              <!--  -->
+
+              <div class="container_me_gusta_and_comentario">
+                <!-- icono de me gusta -->
+
+                <h5 class="me_gusta">
+                  <button [ngStyle]="{'border' : 'none', 'outline' : 'none', 'backgroundColor' : 'inherit', 'marginRight' : '4px'}"
+                  (click)="addMeGusta(publicacion._id)">
+                  <i class="far fa-heart icono_corazon"></i>
+                </button>
+
+                <span *ngIf="publicacion.me_gustas === 0">{{ publicacion.me_gustas }} me gustas</span>
+                <span *ngIf="publicacion.me_gustas === 1" (click)="modalMeGustas()">{{ publicacion.me_gustas }} me gusta</span>
+                <span *ngIf="publicacion.me_gustas > 1" (click)="modalMeGustas()">{{ publicacion.me_gustas }} me gustas</span>
+              </h5>
+              <!--  -->
+
+              <!-- comentar publicacion -->
+              <span class="span_comentario">
+                <input class="input_comentario" type="text" autocomplete="off" #comentario name="comentario" placeholder="Escribe un comentario">
+                <button class="btn_publicar" mat-stroked-button color="primary" (click)="publicar(comentario.value, publicacion._id)">
+                  <span>Publicar</span>
+                </button>
+              </span>
+
+              </div>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+  </div>

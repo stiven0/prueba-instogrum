@@ -1,0 +1,75 @@
+
+  <header>
+
+    <nav>
+
+      <!-- icono de menu responsive -->
+      <div class="icono_menu" (click)="desplegarMenu()">
+        <span>Menu</span>
+        <i class="fas fa-bars" [ngStyle]="{'width' : '100%'}"></i>
+      </div>
+
+      <!-- menu -->
+      <ul class="menu">
+        <li class="icono_fotosgram" [ngStyle]="{'textAlign' : 'center'}">
+          <i class="fab fa-invision fa-2x"></i>
+          <span [ngStyle]="{'fontStyle' : 'italic', 'fontWeight' : '500'}">FotosGram</span>
+        </li>
+
+        <li [ngStyle]="{'textAlign' : 'center'}">
+          <input type="text" name="input_search" #usuario [matAutocomplete]="busqueda" placeholder="Buscar. . . ." (keyup)="search(usuario.value)">
+
+          <!-- autocompletado busqueda -->
+          <mat-autocomplete #busqueda>
+            <mat-option *ngFor="let user of resultados" (click)="irUsuario(user.nombre_usuario)" [value]="user.nombre_usuario">
+              <img class="img-search" [src]=" url + 'devolver-img-usuario/' + user.imagen " [alt]="user.imagen" *ngIf="user.imagen">
+              <img class="img-search" [src]=" url + 'devolver-img-usuario/' + '123' " *ngIf="!user.imagen">
+
+              <span *ngIf="!noResultadosBusqueda">{{ user.nombre_usuario }}</span>
+            </mat-option>
+
+            <mat-option routerLink="/usuarios" *ngIf="!noResultadosBusqueda && resultados && resultados.length > 5">
+              <span class="mssg_ver_mas">Ver mas <i class="fas fa-angle-right"></i></span>
+            </mat-option>
+
+            <mat-option *ngIf="noResultadosBusqueda">
+              <span class="mssg_no_resultados">No hay resultados</span>
+            </mat-option>
+          </mat-autocomplete>
+          <!--  -->
+        </li>
+
+        <!-- icnonos de menu -->
+        <li class="icon_one">
+          <button matTooltip="Explorar" routerLink="/principal">
+            <i class="fas fa-compass" [routerLinkActive]="['active']"
+            [ngStyle]="{'fontSize' : '26px', 'cursor' : 'pointer', 'color' : 'rgb(77, 73, 73)'}"></i>
+          </button>
+        </li>
+
+        <li class="icon_four">
+          <button matTooltip="Publicaciones" routerLink="/publicaciones">
+            <i class="fas fa-poll-h" [routerLinkActive]="['active']"
+            [ngStyle]="{'fontSize' : '26px', 'cursor' : 'pointer', 'color' : 'rgb(77, 73, 73)'}"></i>
+          </button>
+        </li>
+
+        <li class="icon_two">
+          <button matTooltip="Usuarios" routerLink="/usuarios">
+            <i class="fas fa-users" [routerLinkActive]="['active']"
+            [ngStyle]="{'fontSize' : '26px', 'cursor' : 'pointer', 'color' : 'rgb(77, 73, 73)'}"></i>
+          </button>
+        </li>
+
+        <li class="icon_three">
+          <button matTooltip="Perfil" routerLink="/perfil">
+            <i class="fas fa-user-circle" [routerLinkActive]="['active']"
+            [ngStyle]="{'fontSize' : '26px', 'cursor' : 'pointer', 'color' : 'rgb(77, 73, 73)'}"></i>
+          </button>
+        </li>
+      </ul>
+      <!--  -->
+
+    </nav>
+
+  </header>

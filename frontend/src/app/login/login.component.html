@@ -1,0 +1,68 @@
+
+  <div class="contenedor_principal animated fadeIn fast">
+
+    <div class="imagen">
+    </div>
+
+    <div class="formulario">
+      <i class="fab fa-invision fa-2x icono"></i>
+      <h3 class="mssg_welcome">Bienvenido</h3>
+
+      <!-- formulario -->
+      <form [formGroup]="formularioLogin" (ngSubmit)="loginUser()">
+
+        <!-- correo -->
+        <div>
+          <mat-form-field>
+            <mat-icon matSuffix><i class="fas fa-at icon"></i></mat-icon>
+            <mat-label>Correo</mat-label>
+            <input matInput type="text" formControlName="correo">
+            <mat-error *ngIf="formularioLogin.controls['correo'].touched && formularioLogin.controls['correo'].errors?.required">
+              El correo es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- password -->
+        <div>
+          <mat-form-field>
+            <mat-icon matSuffix [style.cursor]="'pointer'" (click)="passwordView(password)"><i class="fas fa-lock icon"></i></mat-icon>
+            <mat-label>Contraseña</mat-label>
+            <input matInput #password type="password" formControlName="password">
+            <mat-error *ngIf="formularioLogin.controls['password'].touched && formularioLogin.controls['password'].errors?.required">
+              La contraseña es requerida
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- checkbox -->
+        <div id="div_check">
+          <mat-checkbox color="primary" formControlName="check"></mat-checkbox>
+          <label class="remenber">Recordarme</label>
+        </div>
+
+        <!-- button de login -->
+        <button mat-raised-button color="primary" *ngIf="!loading">Iniciar sesion</button>
+
+        <!-- button de carga -->
+        <button mat-raised-button color="primary" *ngIf="loading">
+          <i class="fas fa-circle-notch fa-spin"></i>
+        </button>
+
+        <div id="hr_hr">
+          <span><hr/></span>
+          <span [ngStyle]="{'paddingLeft' : '10px', 'paddingRight' : '10px', 'color' : 'gray'}">o</span>
+          <span><hr/></span>
+        </div>
+
+        <h5 class="mssg_error_datos" *ngIf="errorDatosLogin">Error los datos ingresados son incorrectos</h5>
+
+        <h5 class="mssg_register">¿No tienes cuenta?<a routerLink="/register">Registrate</a></h5>
+
+
+
+      </form>
+
+    </div>
+
+  </div>

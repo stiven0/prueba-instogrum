@@ -1,0 +1,94 @@
+
+.contenedor_principal {
+  height: 690px;
+}
+
+.formulario {
+  height: 100%;
+  background-color: rgb(242, 242, 242);
+}
+
+.formulario form,
+.formulario .mssg_cuenta {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+  margin: 20px auto;
+  width: 35%;
+  padding: 20px 10px 20px 10px;
+}
+
+.formulario input {
+  font-family: 'Poppins', sans-serif !important;
+  color: rgb(66, 70, 70);
+  font-size: 15px;
+}
+
+.formulario div {
+  width: 80%;
+  margin: 5px auto;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formulario .mat-form-field {
+  width: 80%;
+  font-size: 15px;
+}
+
+.formulario .icono {
+  color: rgb(22, 27, 51);
+  display: block;
+  margin: 20px auto;
+}
+
+.mssg_welcome {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  color: rgb(22, 27, 51);
+  font-size: 15px;
+}
+
+.mssg_cuenta h5 {
+  text-align: center;
+  margin-top: 20px;
+  color: rgb(41, 43, 43);
+  font-weight: 400;
+}
+
+.mssg_cuenta h5 a {
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 5px;
+  color: rgb(14, 129, 207);
+}
+
+
+.formulario .mat-raised-button {
+  display: block;
+  width: 70%;
+  margin: 30px auto;
+  font-weight: 400;
+  background-color: rgb(14, 129, 207);
+  line-height: 35px;
+}
+
+.mssg_error_nombre_usuario {
+  color: rgb(244, 67, 54);
+  text-align: center;
+}
+
+
+/* css grid */
+.contenedor_principal {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+/* diseño responsive */
+@media screen and (max-width : 760px){
+  .formulario form,
+  .formulario .mssg_cuenta {
+    width: 80%;
+  }
+}

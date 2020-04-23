@@ -1,0 +1,22 @@
+
+<div class="container_principal" *ngIf="usuario">
+
+  <h1 mat-dialog-title>Imagen de perfil</h1>
+  <div mat-dialog-content>
+
+    <img (click)="file_input.click()" [src]=" url + 'devolver-img-usuario/' + usuario.imagen " *ngIf="usuario.imagen && !imgTemporal">
+    <img (click)="file_input.click()" [src]=" url + 'devolver-img-usuario/' + '123' " *ngIf="!usuario.imagen && !imgTemporal">
+
+    <img [src]=" imgTemporal " *ngIf="imgTemporal">
+
+    <input type="file" #file_input hidden (change)="verImg($event.target.files[0])">
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button class="btn_update" (click)="uploadImgProfile()">
+      Actualizar
+      <i class="fas fa-camera-retro icon_camara"></i>
+    </button>
+  </div>
+
+</div>

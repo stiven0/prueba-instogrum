@@ -1,0 +1,66 @@
+
+  <div class="contenedor_principal">
+
+    <!-- informacion de usuario logueado -->
+    <div class="info_usuario">
+
+      <!-- icono de carga -->
+      <div class="loading" *ngIf="!usuario">
+        <i class="fas fa-circle-notch fa-2x fa-spin" [style.Color]="'rgb(77, 73, 73)'"></i>
+      </div>
+
+      <section class="img_usuario" *ngIf="usuario">
+        <img [src]=" url + 'devolver-img-usuario/' + usuario.imagen " *ngIf="usuario.imagen">
+        <img [src]=" url + 'devolver-img-usuario/' + '123' " *ngIf="!usuario.imagen">
+      </section>
+
+      <section class="usuario" *ngIf="usuario">
+        <h4>{{ usuario.nombre_usuario }}</h4>
+        <h5>{{ usuario.nombre_completo }}</h5>
+        <button mat-raised-button color="primary" (click)="subirImg()">Imagen de perfil</button>
+      </section>
+
+    </div>
+    <!--  -->
+
+    <!-- recomendaciones de usuarios -->
+    <div class="recomendaciones">
+
+      <!-- icono de carga -->
+      <div class="loading_usuarios" *ngIf="!usuarios">
+        <i class="fas fa-circle-notch fa-2x fa-spin" [style.Color]="'rgb(77, 73, 73)'"></i>
+      </div>
+
+      <mat-list *ngIf="usuarios && usuarios.length">
+        <h3 mat-subheader>Recomendaciones para ti <span class="more" routerLink="/usuarios">Ver mas</span></h3>
+        <mat-list-item *ngFor="let usuario of usuarios; let i = index">
+          <mat-icon mat-list-icon>
+            <img class="img_mat-list"  [src]=" url + 'devolver-img-usuario/' + usuario.imagen " *ngIf="usuario.imagen">
+            <img class="img_mat-list" [src]=" url + 'devolver-img-usuario/' + '123' " *ngIf="!usuario.imagen">
+          </mat-icon>
+
+          <!-- mensaje seguir -->
+          <h4 class="name_usuario" mat-line>
+            <span [routerLink]="['/perfil', usuario.nombre_usuario]">{{ usuario.nombre_usuario }}</span>
+            <button class="seguir" mat-stroked-button color="primary" (click)="seguirUsuario(usuario._id, usuario.nombre_usuario)"
+             *ngIf="usuariosSeguidos && !usuariosSeguidos.includes(usuario._id)">
+              Seguir
+            </button>
+
+            <!-- mensaje siguiendo -->
+            <button class="siguiendo" mat-stroked-button color="accent" (click)="dejarDeSeguir(usuario)"
+             *ngIf="usuariosSeguidos && usuariosSeguidos.includes(usuario._id)">
+              Siguiendo
+            </button>
+            <!--  -->
+          </h4>
+
+        </mat-list-item>
+      </mat-list>
+
+    </div>
+    <!--  -->
+
+
+
+  </div>

@@ -1,0 +1,37 @@
+
+
+  .contenedor_imagen {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+  }
+
+  .contenedor_imagen h4 {
+    font-weight: 500;
+    margin: 15px 0px;
+  }
+
+  .contenedor_imagen img {
+    width: 60%;
+    height: 400px;
+    background-size: cover;
+  }
+
+  .contenedor_principal button {
+    display: block;
+    margin: 10px auto;
+    font-weight: 500;
+  }
+
+  /* diseño responsive */
+  @media screen and (max-width:760px){
+    .contenedor_imagen {
+      width: 90%;
+    }
+
+    .contenedor_principal button {
+      font-weight: 300;
+      width: 75%;
+    }
+
+  }

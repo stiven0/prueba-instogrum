@@ -1,0 +1,167 @@
+
+<div class="contenedor_principal">
+
+  <!-- componente de header -->
+  <app-header class="pegajoso"></app-header>
+
+  <div class="conatiner_secundario">
+
+    <!-- seccion de opciones para editar perfil -->
+    <section class="opciones_editar">
+      <ul>
+        <li><span class="opcion_editar_datos active" (click)="editInfo('data')">Editar datos</span></li>
+        <li><span class="opcion_editar_password" (click)="editInfo('password')">Cambiar contraseña</span></li>
+        <li><span (click)="cerrarSesion()">Cerrar sesion</span></li>
+      </ul>
+    </section>
+
+    <section class="edicion_user_data" *ngIf="dataUsuario">
+
+      <div class="animated fadeIn info_usuario_update view">
+
+        <form #formulario="ngForm" (ngSubmit)="editarDatos(formulario)">
+
+          <!-- nombre completo -->
+          <mat-form-field>
+            <mat-icon matSuffix><i class="fas fa-edit icono"></i></mat-icon>
+            <mat-label>Nombre completo</mat-label>
+            <input matInput type="text" name="nombre_completo" #nombre_completo="ngModel"
+            [(ngModel)]="dataUsuario.nombre_completo" required>
+          </mat-form-field>
+
+          <!-- nombre usuario -->
+          <mat-form-field>
+            <mat-label disabled>Nombre usuario</mat-label>
+            <input matInput type="text" class="input_disabled" disabled name="nombre_usuario" #nombre_usuario="ngModel"
+            [(ngModel)]="dataUsuario.nombre_usuario" required>
+          </mat-form-field>
+
+          <!-- email -->
+          <mat-form-field>
+            <mat-icon matSuffix><i class="fas fa-edit icono"></i></mat-icon>
+            <mat-label>Correo electronico</mat-label>
+            <input matInput type="text" name="correo" #correo="ngModel"
+            [(ngModel)]="dataUsuario.correo" required>
+          </mat-form-field>
+
+          <!-- descripcion -->
+          <mat-form-field>
+            <mat-icon matSuffix [matMenuTriggerFor]="iconos">
+              <i class="far fa-grin icono"></i>
+            </mat-icon>
+            <mat-label class="label_area">Descripcion personal</mat-label>
+            <textarea matInput name="descripcion" #descripcion="ngModel" maxlength="100" [(ngModel)]="dataUsuario.descripcion">
+              {{ dataUsuario.descripcion }}
+            </textarea>
+
+          </mat-form-field>
+
+          <!-- iconos disponibles para incorporar en la descripcion -->
+            <mat-menu id="menu" #iconos="matMenu">
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(1)">😆</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(2)">😂</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(3)">😎</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(4)">😘</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(5)">😡</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(6)">😭</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(7)">😇</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(8)">👏</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(9)">👍</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(10)">😜</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(11)">👿</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(12)">😷</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(13)">😒</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(14)">❤</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(15)">😉</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(16)">😅</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(17)">😁</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(18)">💩</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(19)">👊</span>
+              <span [style.Cursor]="'pointer'" (click)="agregarIcono(19)">😱</span>
+            </mat-menu>
+            <!--  -->
+
+
+          <span class="err_span" *ngIf="errorForm && errorForm.length > 1 || errorEmailExist">{{ errorForm || errorEmailExist }}</span>
+
+          <!-- btn submit -->
+          <button mat-raised-button color="accent" [disabled]="formulario.invalid" *ngIf="!loading">
+            Actualizar
+          </button>
+
+          <!-- button de carga -->
+          <button mat-raised-button color="accent" *ngIf="loading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </button>
+
+        </form>
+      </div>
+      <!--  -->
+
+
+      <div class="animated fadeIn update_password_user hidde">
+
+        <form class="form_passwords" [formGroup]="formPasswords" (ngSubmit)="changePasswords()">
+
+          <!-- password actual -->
+          <mat-form-field>
+            <mat-icon matSuffix><i class="fas fa-edit icono"></i></mat-icon>
+            <mat-label [style.fontSize]="'14px'">Contraseña actual</mat-label>
+            <input matInput type="text" formControlName="passwordActual" autocomplete="off">
+
+            <!-- errors del campo-->
+            <mat-error *ngIf="formPasswords['controls'].passwordActual.touched &&
+                             formPasswords['controls'].passwordActual.errors?.required">
+              Este campo no puede estar vacio
+            </mat-error>
+            <mat-error *ngIf="formPasswords['controls'].passwordActual.touched &&
+                             formPasswords['controls'].passwordActual.errors?.pattern">
+              Este campo debe tener minimo 4 caracteres y maximo 16, ademas de un digito
+            </mat-error>
+            <!--  -->
+
+          </mat-form-field>
+
+          <!-- password nuevo -->
+          <mat-form-field>
+            <mat-icon matSuffix><i class="fas fa-edit icono"></i></mat-icon>
+            <mat-label [style.fontSize]="'14px'">Contraseña nueva</mat-label>
+            <input matInput type="text" formControlName="passwordNuevo" autocomplete="off">
+
+            <!-- errors del campo-->
+            <mat-error *ngIf="formPasswords['controls'].passwordNuevo.touched &&
+                             formPasswords['controls'].passwordNuevo.errors?.required">
+              Este campo no puede estar vacio
+            </mat-error>
+            <mat-error *ngIf="formPasswords['controls'].passwordNuevo.touched &&
+                             formPasswords['controls'].passwordNuevo.errors?.pattern">
+              Este campo debe tener minimo 4 caracteres y maximo 16, ademas de un digito
+            </mat-error>
+            <!--  -->
+
+          </mat-form-field>
+
+          <!-- error de contraseña actual escrita incorrectamente -->
+          <span class="err_span" *ngIf="errorPasswordActual">
+            La contraseña actual es incorrecta
+          </span>
+
+          <button mat-raised-button color="accent" [disabled]="formPasswords.invalid" *ngIf="!loading">
+            Actualizar
+          </button>
+
+          <!-- button de carga -->
+          <button mat-raised-button color="accent" *ngIf="loading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+</div>

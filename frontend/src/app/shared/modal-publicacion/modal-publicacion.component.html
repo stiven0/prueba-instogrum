@@ -1,0 +1,67 @@
+<div class="container_principal" *ngIf="usuario">
+
+  <h1 mat-dialog-title>{{ usuario.nombre_usuario }}</h1>
+  <div mat-dialog-content>
+
+  <!-- formulario -->
+  <form #form="ngForm">
+
+    <div>
+      <label>Archivo (imagen o video)</label>
+      <input type="file" #btn_input name="archivo" hidden (change)="archivoPublicacion($event.target.files[0])">
+      <button class="btn_file" mat-stroked-button color="primary" (click)="btn_input.click()">
+        Presiona
+        <i class="far fa-file"></i>
+      </button>
+      <span *ngIf="errorVideoPesado && !errorArchivoNoEncontrado">Error el video es muy pesado, el tamaño maximo es de 15MB</span>
+      <span *ngIf="!errorVideoPesado && errorArchivoNoEncontrado">Error es necesario subir un archivo</span>
+    </div>
+
+    <div>
+      <label>Comentario (opcional)</label>
+      <textarea maxlength="200" name="comentario" [(ngModel)]="formularioPublicacion.comentario">
+      </textarea>
+
+      <!-- iconos que se podran utilizar -->
+      <section class="iconos">
+        <button mat-button [matMenuTriggerFor]="iconos">
+          Iconos
+          <i class="far fa-grin"></i>
+        </button>
+        <mat-menu id="menu" #iconos="matMenu">
+
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(1)">😆</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(2)">😂</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(3)">😎</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(4)">😘</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(5)">😡</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(6)">😭</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(7)">😇</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(8)">👏</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(9)">👍</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(10)">😜</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(11)">👿</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(12)">😷</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(13)">😒</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(14)">❤</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(15)">😉</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(16)">😅</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(17)">😁</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(18)">💩</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(19)">👊</span>
+            <span [style.Cursor]="'pointer'" (click)="agregarIcono(19)">😱</span>
+
+        </mat-menu>
+      </section>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-stroked-button class="btn_publicar" (click)="publicar(form)" cdkFocusInitial>Publicar</button>
+    </div>
+
+  </form>
+  <!--  -->
+
+  </div>
+
+</div>

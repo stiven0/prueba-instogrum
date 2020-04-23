@@ -1,0 +1,143 @@
+<div class="contenedor_principal">
+
+  <!-- componente de header -->
+  <app-header class="pegajoso"></app-header>
+
+  <div class="informacion_usuario">
+
+    <!-- informacion del usuario -->
+    <section class="datos_usuario" *ngIf="usuario">
+
+      <!-- imagen de usuario -->
+      <div class="img_user">
+        <img (click)="subirImg()" [src]=" url + 'devolver-img-usuario/' + usuario.imagen " *ngIf="usuario.imagen">
+        <img (click)="subirImg()" [src]=" url + 'devolver-img-usuario/' + '123' " *ngIf="!usuario.imagen">
+      </div>
+
+      <div class="data">
+
+        <!-- datos nombre y opciones -->
+        <div class="data_one">
+          <span>{{ usuario.nombre_usuario }}</span>
+
+          <button mat-stroked-button color="primary" routerLink="/editar-perfil" *ngIf="!usuarioPublico">
+            Editar perfil
+          </button>
+
+          <!-- boton seguir -->
+          <button class="seguir" mat-stroked-button color="primary"
+           (click)="seguirUsuario(usuario._id, usuario.nombre_usuario)"
+           *ngIf="usuarioPublico && usuariosSeguidosUsuario && !usuariosSeguidosUsuario.includes(usuario._id) ||
+                  usuarioPublico && !usuariosSeguidosUsuario">
+            Seguir
+          </button>
+          <!--  -->
+
+          <!-- boton de seguido -->
+          <button mat-stroked-button color="accent"
+           (click)="dejarDeSeguir(usuario)"
+           *ngIf="usuarioPublico && usuariosSeguidosUsuario && usuariosSeguidosUsuario.includes(usuario._id)">
+            Siguiendo
+          </button>
+          <!--  -->
+
+            <!-- boton de cerrar sesion - solo se mostrara si el perfil del usuario logueado -->
+            <button mat-button class="btn_logout" (click)="cerrarSesion()" matTooltip="cerrar sesion" *ngIf="!usuarioPublico">
+              <i class="fas fa-sign-out-alt fa-2x btn_salir"></i>
+            </button>
+
+            <!-- icono de usuario que aparecera si el perfil es de un usuario publico -->
+            <i [style.Cursor]="'default'" class="fas fa-user-check fa-2x btn_salir" *ngIf="usuarioPublico"></i>
+        </div>
+
+        <!-- datos de seguidores, seguidos, y publicaciones  -->
+        <div class="data_two" *ngIf="publicaciones">
+          <span class="span_publicaciones"><small>{{ totalPublicaciones }}</small>Publicaciones</span>
+
+          <span>
+            <small *ngIf="usuario.seguidores > 0">{{ usuario.seguidores }}</small>
+
+            <small *ngIf="usuario.seguidores === 0">0</small>
+            <span [style.Cursor]="'pointer'" (click)="viewSeguidores()">Seguidores</span>
+          </span>
+
+          <span>
+            <small *ngIf="seguidosUser > 0">{{ seguidosUser }}</small>
+            <small *ngIf="seguidosUser === 0">0</small>
+            <span [style.Cursor]="'pointer'" (click)="viewSeguidos()">Seguidos</span>
+          </span>
+
+        </div>
+
+        <!-- descripcion de usuario -->
+        <div class="data_three">
+          <p style="white-space: pre-line" *ngIf="usuario.descripcion">{{ usuario.descripcion }}</p>
+          <p style="white-space: pre-line" *ngIf="!usuario.descripcion && !usuarioPublico">
+            Escribe algo que te identifique
+            <i class="fas fa-user-edit icono_edit"></i>
+          </p>
+          <p [style.fontStyle]="'italic'" style="write-space: pre-line" *ngIf="!usuario.descripcion && usuarioPublico">No hay descripcion!!</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- publicaciones de usuario -->
+    <section class="publicaciones" *ngIf="publicaciones">
+
+      <div class="nav_publicaciones">
+        <span>Publicaciones</span>
+      </div>
+
+      <button class="new_publicacion" mat-raised-button color="primary" (click)="subirPublicacion()"
+      *ngIf="publicaciones.length > 0 && !usuarioPublico">
+        Crear una publicacion
+        <i class="fas fa-upload"></i>
+      </button>
+
+      <div class="div_container_publicaciones" *ngIf="publicaciones.length > 0">
+        <div class="publicacion_div" *ngFor="let publicacion of publicaciones; let i = index">
+
+          <button (click)="borrarPublicacion(publicacion._id, i)" class="btn_delete" mat-stroked-button color="warn" *ngIf="!usuarioPublico">
+            <i class="far fa-trash-alt"></i>
+          </button>
+
+          <!-- si el archivo_multimedia es una imagen -->
+          <img class="animated fadeIn" *ngIf="publicacion.tipoArchivo === 'imagen'"
+          [routerLink]="['/publicacion', publicacion._id]"
+          [src]=" this.url + 'devolver-archivo-publicacion/' + publicacion.archivo_multimedia">
+
+          <!-- si el archivo_multimedia es un video -->
+          <video class="animated fadeIn" [routerLink]="['/publicacion', publicacion._id]"
+          *ngIf="publicacion.tipoArchivo === 'video'" id="imagen_publicacion" controls>
+            <source [src]=" url + 'devolver-archivo-publicacion/' + publicacion.archivo_multimedia " type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <!-- si el usuario no tiene publicaciones -->
+      <div class="no_publicaciones" *ngIf="publicaciones.length === 0">
+        <img class="img_no_publicaciones" src="assets/img/mono2.png">
+        <span *ngIf="!usuarioPublico">Ohhh Valla, no tienes publicaciones!!!</span>
+        <button mat-stroked-button color="primary" (click)="subirPublicacion()" *ngIf="!usuarioPublico">
+          Empieza ya
+        </button>
+
+        <!-- si el usuario no es el logueado y no tiene publicaciones -->
+        <span *ngIf="usuarioPublico">Ohhh Valla, este usuario no tiene publicaciones!!!</span>
+        <button mat-stroked-button color="primary" *ngIf="usuarioPublico">
+          Recomiendale algo
+        </button>
+      </div>
+
+    </section>
+
+    <!-- icono de carga -->
+    <div *ngIf="!publicaciones" [style.textAlign]="'center'">
+        <i class="fas fa-circle-notch fa-3x fa-spin" [ngStyle]="{'color' : 'rgb(77, 73, 73)'}"></i>
+    </div>
+
+  </div>
+
+
+</div>

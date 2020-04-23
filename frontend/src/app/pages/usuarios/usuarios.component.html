@@ -1,0 +1,50 @@
+<div class="contenedor_principal">
+
+  <!-- componente de header -->
+  <app-header class="pegajoso"></app-header>
+
+  <div class="contenedor_usuarios">
+
+    <div class="slide_toggle">
+      <mat-slide-toggle (click)="changeUsers()">
+        Obtener usuarios mas seguidos
+      </mat-slide-toggle>
+    </div>
+
+    <!-- icono de carga -->
+    <div class="loading" *ngIf="usuarios.length == 0">
+      <i class="fas fa-circle-notch fa-3x fa-spin" [style.Color]="'rgb(77, 73, 73)'"></i>
+    </div>
+
+
+    <mat-list *ngIf="usuarios">
+      <h3 mat-subheader>Usuarios recomendados</h3>
+
+      <mat-list-item class="animated fadeIn" *ngFor="let usuario of usuarios; let i = index">
+        <mat-icon mat-list-icon>
+          <img class="img_user" [src]=" url + 'devolver-img-usuario/' + usuario.imagen " *ngIf="usuario.imagen">
+          <img class="img_user" [src]=" url + 'devolver-img-usuario/' + '123' "  *ngIf="!usuario.imagen">
+        </mat-icon>
+        <h4 mat-line (click)="dirigirUsuario(usuario.nombre_usuario)">
+          {{ usuario.nombre_usuario }}
+        </h4>
+
+        <button class="seguir" mat-stroked-button color="primary" *ngIf="usuariosSeguidos && !usuariosSeguidos.includes(usuario._id)"
+        (click)="seguirUsuario(usuario._id, usuario.nombre_usuario)">
+          Seguir
+        </button>
+
+        <button class="siguiendo" mat-stroked-button color="accent" *ngIf="usuariosSeguidos && usuariosSeguidos.includes(usuario._id)"
+        (click)="dejarDeSeguir(usuario)">
+          Siguiendo
+        </button>
+
+      </mat-list-item>
+    </mat-list>
+
+
+
+  </div>
+
+
+</div>

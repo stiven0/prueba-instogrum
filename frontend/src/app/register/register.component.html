@@ -1,0 +1,82 @@
+
+<div class="contenedor_principal animated fadeIn fast">
+
+  <div class="formulario">
+   <i class="fab fa-invision fa-2x icono"></i>
+   <h3 class="mssg_welcome">Registrate y conoce miles de personas</h3>
+
+    <!-- formulario de registro -->
+    <form [formGroup]="formularioRegistro" (ngSubmit)="registerUsuario()">
+
+      <div>
+        <mat-form-field>
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput type="text" formControlName="nombre_completo">
+          <mat-error *ngIf="formularioRegistro.controls['nombre_completo'].touched && formularioRegistro.controls['nombre_completo'].errors?.required">
+            El nombre es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+            <mat-icon matSuffix *ngIf="errorCorreoUsuario" [style.Color]="'#f44336'"><i class="fas fa-times"></i></mat-icon>
+          <mat-label>Correo</mat-label>
+          <input matInput type="email" formControlName="correo">
+          <mat-error *ngIf="formularioRegistro.controls['correo'].touched &&
+                            formularioRegistro.controls['correo'].errors?.required">
+            El correo es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-icon matSuffix *ngIf="errorNameUsuario" [style.Color]="'#f44336'"><i class="fas fa-times"></i></mat-icon>
+          <mat-label>Nombre de usuario</mat-label>
+          <input matInput type="text" formControlName="nombre_usuario">
+          <mat-error *ngIf="formularioRegistro.controls['nombre_usuario'].touched &&
+                            formularioRegistro.controls['nombre_usuario'].errors?.required">
+            El nombre de usuario es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-icon matSuffix [style.cursor]="'pointer'" (click)="passwordView(password)"><i class="fas fa-lock icon"></i></mat-icon>
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" #password formControlName="password">
+          <mat-error *ngIf="formularioRegistro.controls['password'].touched && formularioRegistro.controls['password'].errors?.required">
+            La contraseña es requerida
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- mensaje de error que aparecera si el nombre de usuario ya existe -->
+      <h5 class="mssg_error_nombre_usuario" *ngIf="errorNameUsuario">El nombre de usuario no esta disponible</h5>
+
+      <!-- mensaje de error que aparecera si el correo de usuario ya existe -->
+      <h5 class="mssg_error_nombre_usuario" *ngIf="errorCorreoUsuario">El correo ingresado ya existe, elige otro</h5>
+
+      <!-- button de registro -->
+      <button mat-raised-button color="primary" *ngIf="!loading">
+        Registrarte
+        <i class="fas fa-tasks"></i>
+      </button>
+
+      <!-- button de carga -->
+      <button mat-raised-button color="primary" *ngIf="loading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </button>
+
+    </form>
+
+
+    <div class="mssg_cuenta">
+      <h5>¿Tienes cuenta? <a routerLink="/login">Inicia sesion</a></h5>
+    </div>
+
+  </div>
+
+</div>

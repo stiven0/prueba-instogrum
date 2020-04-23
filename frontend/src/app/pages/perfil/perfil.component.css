@@ -1,0 +1,239 @@
+
+  .informacion_usuario {
+    padding: 20px;
+    width: 70%;
+    margin: 20px auto;
+    border: 1px solid #ebebeb;
+    background-color: rgb(248, 248, 248);
+    border-radius: 10px;
+  }
+
+  .btn_delete {
+    line-height: 30px;
+    background-color: white !important;
+    margin-bottom: 2px;
+  }
+
+  .btn_logout {
+    background-color: rgb(248, 248, 248) !important;
+  }
+
+  .img_user {
+    text-align: center;
+  }
+
+  .img_user img {
+    border-radius: 50%;
+    height: 200px;
+    width: 70%;
+    cursor: pointer;
+  }
+
+  .data_one, .data_two, .data_three {
+    margin-bottom: 20px;
+  }
+
+  .data_one {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .data_two {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .data_two .span_publicaciones {
+    margin-right: -4%;
+  }
+
+  .data_three {
+    text-align: center;
+  }
+
+  .data_one span {
+    color: rgb(55, 55, 57);
+    padding-top: 15px;
+  }
+
+  .data_one button {
+    background-color: white;
+  }
+
+  .data_three p {
+    width: 50%;
+    margin: auto;
+  }
+
+  .btn_salir {
+    color: gray;
+    cursor: pointer;
+  }
+
+  .new_publicacion {
+    display: block;
+    margin: 20px auto;
+    background-color : rgb(84, 103, 209);
+    font-weight: 500;
+  }
+
+  .data_two small {
+    font-size: 14px;
+    margin-right: 5px;
+    color: rgb(55, 55, 57);
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .data_two span {
+    color: gray;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    /* margin-right: 10%; */
+  }
+
+  .data_three p {
+    font-size: 15px;
+  }
+
+  .icono_edit {
+    color: gray;
+    cursor: pointer;
+  }
+
+  .publicaciones {
+    margin-top: 40px;
+  }
+
+  .nav_publicaciones {
+    border: 1px solid #ebebeb;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+    margin-top: 30px;
+  }
+
+  .nav_publicaciones span {
+    font-size: 14px;
+    color: gray;
+    padding: 10px;
+  }
+
+  .publicaciones .div_container_publicaciones img,
+  .publicaciones .div_container_publicaciones video {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .publicaciones .publicacion_div {
+    position: relative;
+  }
+
+  .publicaciones .div_container_publicaciones {
+    border-radius: 5px;
+    width: 100%;
+    margin: 50px auto;
+    columns: 3;
+    columun-gap : 10px;
+    box-sizing: border-box;
+  }
+
+
+  .no_publicaciones {
+    margin: 30px auto;
+    text-align: center;
+  }
+
+  .no_publicaciones button {
+    display: block;
+    margin: 10px auto;
+    margin-bottom: 50px;
+    background-color: white;
+  }
+
+  .no_publicaciones .icono_astro {
+    color: gray;
+  }
+
+  .no_publicaciones span {
+    color: rgb(55, 55, 57);
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  .img_no_publicaciones {
+    display: block;
+    margin: auto;
+    width: 20%;
+  }
+
+
+  /* css grid */
+  .contenedor_principal {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .datos_usuario {
+    display: grid;
+    grid-template-columns: repeat(2, 30% 70%);
+  }
+
+  /* diseño responsive */
+  @media screen and (max-width: 760px){
+
+    .informacion_usuario {
+      padding: 10px;
+      width: 85%;
+      margin: 20px auto;
+    }
+
+    .datos_usuario {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .data_one {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .data_two .span_publicaciones {
+      margin-right: 0%;
+    }
+
+    .data_two span {
+      font-size: 11px;
+    }
+
+    .data_three p {
+      font-size: 13px;
+    }
+
+    .publicaciones .div_container_publicaciones {
+      columns: 2;
+      width: calc(100% - 5px);
+      box-sizing: border-box;
+    }
+
+    .new_publicacion {
+      line-height: 32px;
+    }
+
+    .btn_delete {
+      line-height: 25px;
+      width: 100%;
+    }
+
+
+
+
+
+
+
+
+
+
+  }

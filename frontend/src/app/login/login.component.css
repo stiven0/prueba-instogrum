@@ -1,0 +1,132 @@
+
+  .contenedor_principal {
+    height: 690px;
+  }
+
+   .imagen {
+    background-image:  linear-gradient(
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),  url("../../assets/img/img6.jpg");
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    height: 100%;
+    background-size: cover;
+  }
+
+  .formulario {
+    height: 100%;
+    background-color: rgb(242, 242, 242);
+  }
+
+  .formulario form {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+    margin: 20px auto;
+    width: 70%;
+    padding: 20px 10px 20px 10px;
+  }
+
+  .formulario .icono {
+    color: var(--color_icono_login);
+    display: block;
+    margin: 20px auto;
+  }
+
+  .formulario .icon {
+    color: var(--color_icono_login);
+    font-size: 18px;
+  }
+
+  .formulario .mssg_welcome {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color : var(--color_icono_login);
+  }
+
+  .formulario input {
+    font-family: 'Poppins', sans-serif !important;
+    color: rgb(66, 70, 70);
+    font-size: 15px;
+  }
+
+  .formulario div {
+    width: 90%;
+    margin: 5px auto;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .formulario .mat-form-field {
+    width: 90%;
+  }
+
+  .formulario #div_check {
+    text-align: left;
+    padding-left: 10%;
+  }
+
+  .remenber {
+    padding-left: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: rgb(41, 43, 43);
+  }
+
+  .formulario .mat-raised-button {
+    display: block;
+    width: 80%;
+    margin: 30px auto;
+    font-weight: 400;
+    background-color: rgb(14, 129, 207);
+    line-height: 35px;
+  }
+
+  .formulario form #hr_hr span hr {
+    width: 40%;
+    display: inline-block;
+  }
+
+  .mssg_register {
+    text-align: center;
+    margin-top: 20px;
+    color: rgb(41, 43, 43);
+    font-weight: 400;
+  }
+
+  .mssg_register a {
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 5px;
+    color: rgb(14, 129, 207);
+  }
+
+  .mssg_error_datos {
+    color: rgb(244, 67, 54);
+    text-align: center;
+  }
+
+  .formulario form div .mat-error {
+    text-align: left;
+    margin: 0px auto;
+    font-size: 13px;
+  }
+
+  /* css grid */
+  .contenedor_principal {
+    display: grid;
+    grid-template-columns: repeat(2, 55% 45%);
+  }
+
+  /* diseño responsive */
+  @media screen and (max-width : 760px) {
+    .imagen {
+      display: none;
+    }
+
+    .contenedor_principal {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+  }
